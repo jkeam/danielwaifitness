@@ -58,16 +58,26 @@ if(isset($_POST['frm_Email'])) {
   $email_message .= "Comments: ".clean_string($comments)."\n";     
         
   // create email headers
-  $headers = 'From: '.$email_from."\r\n". 
-  'Reply-To: '.$email_from."\r\n" . 
-  'X-Mailer: PHP/' . phpversion(); 
-  mail($email_to, $email_subject, $email_message, $headers); 
+  $headers = 'From: '.$email_from."\r\n".
+  'Reply-To: '.$email_from."\r\n" .
+  'X-Mailer: PHP/' . phpversion();
+
+  //this doesn't work with the headers!!!
+  //mail($email_to, $email_subject, $email_message, $headers);
+
+  //simple mail call below works
+  mail('dw@danielwaifitness.com', 'Someone is interested!', $email_message);
+
 ?>
 
-Thank you for contacting us. We will be in touch with you very soon.
- <form action="#">
-    <input type="submit" value="Return to Daniel Wai Fitness">
-</form>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+<div class="container">
+  <br>
+  Thank you for contacting us. We will be in touch with you very soon.
+  <br>
+  <a class="btn btn-default" role="button" href='/'>Go Back</a>
+</div>
+
 <?php
 } else {
   echo $error_message;
