@@ -7,7 +7,7 @@ $('#nav').affix({
       offset: {
         top: $('header').height()-$('#nav').height()
       }
-});	
+});
 
 /* highlight the top nav as scrolling occurs */
 $('body').scrollspy({ target: '#nav' })
@@ -27,16 +27,16 @@ $('#nav .navbar-nav li>a').click(function(){
 
 /* copy loaded thumbnails into carousel */
 // $('.panel .img-responsive').on('load', function() {
-  
+
 // }).each(function(i) {
 //   if(this.complete) {
 //   	var item = $('<div class="item"></div>');
 //     var itemDiv = $(this).parent('a');
 //     var title = $(this).parent('a').attr("title");
-    
+
 //     item.attr("title",title);
 //   	$(itemDiv.html()).appendTo(item);
-//   	item.appendTo('#modalCarousel .carousel-inner'); 
+//   	item.appendTo('#modalCarousel .carousel-inner');
 //     if (i==0){ // set first item active
 //      item.addClass('active');
 //     }
@@ -47,37 +47,54 @@ $('#nav .navbar-nav li>a').click(function(){
 //Modal Start
 /* when clicking a thumbnail */
 $('.panel-thumbnail>a').click(function(e){
-  
+
     e.preventDefault();
     var idx = $(this).parents('.panel').parent().index();
   	var id = parseInt(idx);
-  	
+
     $($(e.target).attr('data-target')).modal('show');
   	return false;
 });
 
 var atheneModal = $('#atheneModal');
 var peterModal  = $('#peterModal');
+var michaeModal = $('#michaeModal');
 
 //Prev and Next button
 //athene
 $('#athene_prev').click(function(e){
   atheneModal.modal('hide');
-  peterModal.modal('show');
+  peterModal.modal('hide');
+  michaeModal.modal('show');
 });
 $('#athene_next').click(function(e) {
   atheneModal.modal('hide');
   peterModal.modal('show');
+  michaeModal.modal('hide');
 });
 
 //peter
 $('#peter_prev').click(function(e) {
   peterModal.modal('hide');
   atheneModal.modal('show');
+  michaeModal.modal('hide');
 });
 $('#peter_next').click(function(e) {
   peterModal.modal('hide');
+  atheneModal.modal('hide');
+  michaeModal.modal('show');
+});
+
+//michae
+$('#michae_prev').click(function(e) {
+  peterModal.modal('show');
+  atheneModal.modal('hide');
+  michaeModal.modal('hide');
+});
+$('#michae_next').click(function(e) {
+  peterModal.modal('hide');
   atheneModal.modal('show');
+  michaeModal.modal('hide');
 });
 //Modal End
 
@@ -97,7 +114,7 @@ function initialize() {
      	scrollwheel: false
 	};
 	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-	
+
   	if (geocoder) {
       geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
@@ -113,9 +130,9 @@ function initialize() {
 
             var marker = new google.maps.Marker({
                 position: results[0].geometry.location,
-                map: map, 
+                map: map,
                 title:address
-            }); 
+            });
 
           } else {
           	alert("No results found");
